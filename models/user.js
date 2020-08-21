@@ -31,5 +31,14 @@ module.exports = function(sequelize, DataTypes) {
       null
     );
   });
+
+  User.associate = function(models) {
+    // Associating User with rock
+    // When a user is deleted, also delete any associated rocks
+    User.hasMany(models.Movie, {
+      onDelete: "cascade"
+    });
+
+  };
   return User;
 };
