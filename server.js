@@ -13,7 +13,7 @@ const db = require("./models");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+//Necessary for deployment!
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
