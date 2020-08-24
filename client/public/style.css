@@ -1,0 +1,19 @@
+
+nav{
+    font-size: large;
+}
+
+.navbar-brand {
+    font-size: large !important;
+    margin-top: auto;
+}
+
+.welcome {
+    margin-top: 50px;
+    opacity: 0;
+}
+
+
+.welcome:hover {
+    opacity: 1;
+}
