@@ -8,7 +8,7 @@ import Library from "./pages/Library";
 import { useStoreContext } from './utils/GlobalStore';
 import API from './utils/API';
 import { AUTH_SET_LOGGED_IN, AUTH_SET_LOGGED_OUT } from "./utils/actions";
-
+import NavTab from "../src/components/NavTabs"
 
 function App() {
     // Our provider is setup in index.js so we can use the GlobalStore here easily.
@@ -49,14 +49,18 @@ function App() {
 
         <Router>
             <div>
-                {/* Componetize this into Nav */}
+                {/* Need to get render username on NavTab  */}
                 <div>
                         {!state.userLoggedIn ? (
                             // if the user is Logged out
-                            <>
-                                <b>Welcome Guest!</b> &nbsp;&nbsp;&nbsp;
+                            <div className="container-fluid">
+                                <div className="row text-center">
+                                    <div className="col-md-12 welcome">
+                                <h1>Welcome Guest!</h1> &nbsp;&nbsp;&nbsp;
                                 <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
-                            </>
+                                    </div>
+                                </div>
+                            </div>
                         ) : (
                             // If the user is Logged In
                             <>
@@ -78,6 +82,7 @@ function App() {
                         ) : (
                             // These routes are only available to LOGGED IN users
                             <>
+                              <NavTab/>
                                 <Route exact path={["/login","/signup"]}>
                                     {/* If you are logged in, going to the login/signup page will take you to the members page */}
                                     <Redirect to="/members" />
