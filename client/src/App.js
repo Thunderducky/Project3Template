@@ -50,10 +50,14 @@ function App() {
                 <div>
                         {!state.userLoggedIn ? (
                             // if the user is Logged out
-                            <>
-                                <b>Welcome Guest!</b> &nbsp;&nbsp;&nbsp;
+                            <div className="container-fluid">
+                                <div className="row text-center">
+                                    <div className="col-md-12 welcome">
+                                <h1>Welcome Guest!</h1> &nbsp;&nbsp;&nbsp;
                                 <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
-                            </>
+                                    </div>
+                                </div>
+                            </div>
                         ) : (
                             // If the user is Logged In
                             <>

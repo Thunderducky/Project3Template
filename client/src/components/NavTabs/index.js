@@ -1,4 +1,5 @@
 import React from "react";
+import { useStoreContext } from "../../utils/GlobalStore"
 import {
     Navbar,
     NavbarBrand,
@@ -9,11 +10,12 @@ import {
   } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const NavTab = (props) => {
+function NavTab () {
     // const [isOpen, setIsOpen] = useState(false);
   
     // const toggle = () => setIsOpen(!isOpen);
-
+    const [state] = useStoreContext();
+    const { username } = state;
     return (
         <div>
     
@@ -31,7 +33,7 @@ const NavTab = (props) => {
                   <NavLink href="/wishlist">Wishlist</NavLink>
                 </NavItem>
               </Nav>
-              <NavbarText> Hi, {props.username}</NavbarText> 
+              <NavbarText> Hi, {username}</NavbarText> 
                   <NavLink className="float-right" href="/">Logo out</NavLink>
 
           </Navbar>
