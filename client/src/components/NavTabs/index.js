@@ -7,7 +7,8 @@ import {
     NavLink,
     NavbarText
   } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const NavTab = (props) => {
     // const [isOpen, setIsOpen] = useState(false);
   
@@ -16,11 +17,11 @@ const NavTab = (props) => {
     return (
         <div>
     
-          <Navbar color="dark" dark expand="md">
+          <Navbar color="dark" dark expand="lg" fixex="top">
             <NavbarBrand href="/">Movie Librariran</NavbarBrand>
               <Nav className="mr-auto" navbar>
                 <NavItem>
-                  <NavLink href="/Home/">Home</NavLink>
+                  <NavLink href="/Home">Home</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/library">library</NavLink>
@@ -28,11 +29,10 @@ const NavTab = (props) => {
                 <NavItem>
                   <NavLink href="/wishlist/">Wishlist</NavLink>
                 </NavItem>
-                  <NavbarText> Hi, {props.username}</NavbarText> 
               </Nav>
-              <NavItem>
-                  <NavLink href="/">Log-out</NavLink>
-              </NavItem>
+              <NavbarText> Hi, {props.username}</NavbarText> 
+                  <NavLink className="float-right" href="/">Log-out</NavLink>
+
           </Navbar>
         </div>
       );
