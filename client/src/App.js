@@ -7,7 +7,7 @@ import Members from "./pages/Members";
 import { useStoreContext } from './utils/GlobalStore';
 import API from './utils/API';
 import { AUTH_SET_LOGGED_IN, AUTH_SET_LOGGED_OUT } from "./utils/actions";
-
+import NavTab from "../src/components/NavTabs"
 
 function App() {
     // Our provider is setup in index.js so we can use the GlobalStore here easily.
@@ -46,7 +46,8 @@ function App() {
 
         <Router>
             <div>
-                {/* Componetize this into Nav */}
+                {/* Need to get render username on NavTab  */}
+                 <NavTab/>
                 <div>
                         {!state.userLoggedIn ? (
                             // if the user is Logged out
