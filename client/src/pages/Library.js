@@ -5,12 +5,12 @@ import SqlAPI from "../utils/SQL-API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import DeleteBtnDisplay from "../components/DisplayDeleteBtn";
-import {NavContext} from "../../src/UserContext";
+// import {NavContext} from "../../src/UserContext";
 import "./style.css";
 
 
 
-function Saved() {
+function Library() {
   // Setting our component's initial state
 const [movies, setMovies] = useState([]);
 
@@ -98,4 +98,4 @@ async function handleDelete(id, title) {
   }
 
 
-export default MyLibrary;
+export default Library;
