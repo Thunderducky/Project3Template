@@ -22,6 +22,14 @@ module.exports = function(sequelize, DataTypes) {
     synopsis: {
       type: DataTypes.TEXT,
       
+    },
+    format: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    wishlist: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   });
   //  Define function to associate movies in db to logged in user
