@@ -47,7 +47,6 @@ function App() {
         <Router>
             <div>
                 {/* Need to get render username on NavTab  */}
-                 <NavTab/>
                 <div>
                         {!state.userLoggedIn ? (
                             // if the user is Logged out
@@ -76,6 +75,7 @@ function App() {
                         ) : (
                             // These routes are only available to LOGGED IN users
                             <>
+                              <NavTab/>
                                 <Route exact path={["/login","/signup"]}>
                                     {/* If you are logged in, going to the login/signup page will take you to the members page */}
                                     <Redirect to="/members" />
