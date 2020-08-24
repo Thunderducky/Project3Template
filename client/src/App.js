@@ -4,6 +4,7 @@ import './App.css';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Members from "./pages/Members";
+import Library from "./pages/Library";
 import { useStoreContext } from './utils/GlobalStore';
 import API from './utils/API';
 import { AUTH_SET_LOGGED_IN, AUTH_SET_LOGGED_OUT } from "./utils/actions";
@@ -18,11 +19,13 @@ function App() {
     useEffect(() => {
         // Try getting our user-data, if the user is logged in, we will update our GlobalStore to refelct that
         API.checkUserInfo().then(response => {
-            const { email } = response.data;
+            const { email, username } = response.data;
+
             dispatch({
                 type: AUTH_SET_LOGGED_IN,
                 data: {
-                    email
+                    email,
+                    username
                 }
             })
         }).catch(err => {
@@ -85,6 +88,7 @@ function App() {
                                     <Redirect to="/members" />
                                 </Route>
                                 <Route exact path="/members" component={Members} />
+                                <Route exact path="/library" component={Library} />
                             </>
                             )
                     }
