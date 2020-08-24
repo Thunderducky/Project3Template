@@ -80,7 +80,7 @@ async function handleDelete(id, title) {
                         <strong>
                           {movie.Title}
                         </strong>
-                        <DeleteBtn onClick = {() => handleDelete(movie.id, movie.title)}/>
+                        <DeleteBtn onClick = {() => handleDelete(movie.id, movie.Title)}/>
                         <hr></hr>
                     </ListItem>
                   );
