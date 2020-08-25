@@ -64,9 +64,9 @@ const LibraryTab = () => {
   return (
     <div>
       
-      <Jumbotron fluid>
+      <Jumbotron fluid className="jumbotronLibrary">
         <Container fluid>
-          <h1 className="display-3 jumbotron">Your Shelf</h1>
+          <h1 className="display-3">Your Shelf</h1>
         </Container>
       </Jumbotron>
       
