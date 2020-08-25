@@ -10,8 +10,9 @@ import {
   Col,
   ListGroup,
   ListGroupItem,
-  Jumbotron, 
-  Container
+  Jumbotron,
+  Container,
+  Media,
 } from "reactstrap";
 import classnames from "classnames";
 import SqlAPI from "../utils/SQL-API";
@@ -63,13 +64,12 @@ const LibraryTab = () => {
 
   return (
     <div>
-      
       <Jumbotron fluid className="jumbotronLibrary">
         <Container fluid>
           <h1 className="display-3">Your Shelf</h1>
         </Container>
       </Jumbotron>
-      
+
       <Row>
         <Col className="libraryTabs" sm="8">
           <Nav tabs>
@@ -127,14 +127,20 @@ const LibraryTab = () => {
                     {moviesArray.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
-                          <Col sm="3">
-                            <img src={movie.poster} alt={movie.title} />
-                          </Col>
-                          <Col sm="9">
-                            <h5>{movie.title}</h5><Button outline color="danger" size="sm">Remove from Shelf</Button>
-                            <br></br>
-                            <p>{movie.synopsis}</p>
-                          </Col>
+                          <Media>
+                            <Media left>
+                              <Media
+                                object
+                                data-src={movie.poster}
+                                alt={movie.title}
+                              />
+                            </Media>
+                            <Media body>
+                              <Media heading>{movie.title}</Media>
+                              {movie.synopsis}
+                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                            </Media>
+                          </Media>
                         </ListGroupItem>
                       </Row>
                     ))}
@@ -154,14 +160,20 @@ const LibraryTab = () => {
                     {moviesArray.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
-                          <Col sm="3">
-                            <img src={movie.poster} alt={movie.title} />
-                          </Col>
-                          <Col sm="9">
-                            <h5>{movie.title}</h5><Button outline color="danger" size="sm">Remove from Shelf</Button>
-                            <br></br>
-                            <p>{movie.synopsis}</p>
-                          </Col>
+                          <Media>
+                            <Media left>
+                              <Media
+                                object
+                                data-src={movie.poster}
+                                alt={movie.title}
+                              />
+                            </Media>
+                            <Media body>
+                              <Media heading>{movie.title}</Media>
+                              {movie.synopsis}
+                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                            </Media>
+                          </Media>
                         </ListGroupItem>
                       </Row>
                     ))}
@@ -181,14 +193,20 @@ const LibraryTab = () => {
                     {moviesArray.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
-                          <Col sm="3">
-                            <img src={movie.poster} alt={movie.title} />
-                          </Col>
-                          <Col sm="9">
-                            <h5>{movie.title}</h5><Button outline color="danger" size="sm">Remove from Shelf</Button>
-                            <br></br>
-                            <p>{movie.synopsis}</p>
-                          </Col>
+                          <Media>
+                            <Media left>
+                              <Media
+                                object
+                                data-src={movie.poster}
+                                alt={movie.title}
+                              />
+                            </Media>
+                            <Media body>
+                              <Media heading>{movie.title}</Media>
+                              {movie.synopsis}
+                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                            </Media>
+                          </Media>
                         </ListGroupItem>
                       </Row>
                     ))}
@@ -208,14 +226,20 @@ const LibraryTab = () => {
                     {moviesArray.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
-                          <Col sm="3">
-                            <img src={movie.poster} alt={movie.title} />
-                          </Col>
-                          <Col sm="9">
-                            <h5>{movie.title}</h5><Button outline color="danger" size="sm">Remove from Shelf</Button>
-                            <br></br>
-                            <p>{movie.synopsis}</p>
-                          </Col>
+                          <Media>
+                            <Media left>
+                              <Media
+                                object
+                                data-src={movie.poster}
+                                alt={movie.title}
+                              />
+                            </Media>
+                            <Media body>
+                              <Media heading>{movie.title}</Media>
+                              {movie.synopsis}
+                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                            </Media>
+                          </Media>
                         </ListGroupItem>
                       </Row>
                     ))}
