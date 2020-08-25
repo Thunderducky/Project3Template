@@ -18,10 +18,13 @@ export default {
 
   getMovieByID: function(id) {
     const key = "930b635d";
+    var query;
     query = `https://www.omdbapi.com/?apikey=${key}&i=${id}`;
     console.log(query);
     return axios.get(query);
   }
            
 }
+
+//https://www.omdbapi.com/?apikey=930b635d&t=saw
 

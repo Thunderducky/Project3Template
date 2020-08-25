@@ -1,20 +1,27 @@
-import React from "react"
-import {Button, Input, FormGroup } from "reactstrap"
+import React from "react";
 
+// This file exports the Input, TextArea, and FormBtn components
 
-export function SearchBar(props) {
-    return (
-      <FormGroup>
-        <Input className="form-control" {...props} />
-      </FormGroup>
-    );
-  }
-  
+export function Input(props) {
+  return (
+    <div className="form-group">
+      <input className="form-control" {...props} />
+    </div>
+  );
+}
 
-  export function FormBtn(props) {
-    return (
-      <Button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
-        {props.children}
-      </Button>
-    );
-  }
+export function TextArea(props) {
+  return (
+    <div className="form-group">
+      <textarea className="form-control" rows="20" {...props} />
+    </div>
+  );
+}
+
+export function FormBtn(props) {
+  return (
+    <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
+      {props.children}
+    </button>
+  );
+}
