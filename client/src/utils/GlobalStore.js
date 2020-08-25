@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useState } from "react";
 import { AUTH_SET_LOGGED_OUT, AUTH_SET_LOGGED_IN } from "./actions";
 
 const StoreContext = createContext();
@@ -45,4 +45,20 @@ const useStoreContext = () => {
     return useContext(StoreContext);
 }
 
-export { StoreProvider, useStoreContext };
+//Create movie context. We can pass movie info thru tunnel to use in any component file
+const MovieContext = createContext();
+// Custom hook to use movie context
+const useMovieContext = () => {
+    return useContext(MovieContext);
+}
+//Movie Provider
+const MovieProvider = ({props}) => {
+    const [movieID, setMovieID] = useState("");
+    return (
+        <MovieContext.Provider value = {{movieID, setMovieID}} >
+            {props}
+        </MovieContext.Provider>
+    )
+}
+
+export { StoreProvider, useStoreContext, MovieProvider, useMovieContext  };

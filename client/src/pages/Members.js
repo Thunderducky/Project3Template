@@ -77,7 +77,7 @@ function saveClick(movie){
   title: movie.Title,
   poster: movie.Poster,
   year: movie.Year,
-  synopsis: movie.synopsis,
+  synopsis: movie.Plot,
   format: movie.format,
   wishlist: movie.wishlist
   }
