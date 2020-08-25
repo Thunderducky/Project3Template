@@ -5,6 +5,9 @@ export default {
   getMovies: function() {
     return axios.get("/api/movies");
   },
+  getWishList: function() {
+    return axios.get("/api/wishlist");
+  },
   getMoviesByFormat: function(format) {
     return axios.get("/api/movies/" + format);
   },
