@@ -1,18 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import SqlAPI from "../utils/SQL-API";
 import SaveBtn from "../components/SaveBtn";
 // import {NavContext} from "../../src/UserContext";
 import "./style.css";
 import OMDbAPI from "../utils/OMDbAPI";
 import useDebounce from "../utils/debounceHook";
+import {MovieContext} from "../utils/movieContext";
 import {
-  TabContent,
-  TabPane,
   Form,
   Input,
-  Nav,
-  NavItem,
-  NavLink,
   Button,
   Row,
   Col,
@@ -27,21 +22,23 @@ import {
 function Members() {
   // Setting our component's initial state
 const [movies, setMovies] = useState([]);
-const [formObject, setFormObject] = useState({
-  title: "",
-  director: "",
-  year: "",
-  synopsis: ""
-})
+const [formObject, setFormObject] = useState({title: ""});
+
+const MovieContextFn = () => {
+const passMovie = useContext(MovieContext);
+return passMovie;
+} 
+const {movieID, setMovieID} = MovieContextFn()
+
 
 const debouncedSearchTerm = useDebounce(formObject, 800);
   // Load all movies and store them with setMovies
   useEffect( () => {
-    if(!formObject.title && !formObject.director){
+    if(!formObject.title){
       return;
     }
     if(debouncedSearchTerm){
-      getMovies(formObject.title, formObject.director).then(res => {
+      getMovies(formObject.title).then(res => {
         if(res!== undefined && res.length !== 0){
           res.forEach(element => {
             element.saved = false;
@@ -54,7 +51,7 @@ const debouncedSearchTerm = useDebounce(formObject, 800);
   }, [debouncedSearchTerm])
 
   // Loads all movies and sets state to movies that match search
-  async function getMovies(title, director) {
+  async function getMovies(title) {
     try{
       let res = await OMDbAPI.searchMovies(title);
       console.log(res.data);
@@ -72,34 +69,20 @@ function handleInputChange(event) {
   console.log(formObject);
 };
 
-function saveClick(movie){
+async function movieClick(movie){
   var movieDB = {
   title: movie.Title,
-  poster: movie.Poster,
-  year: movie.Year,
-  synopsis: movie.Plot,
-  format: movie.format,
-  wishlist: movie.wishlist
+  id: movie.imdbID
   }
-  console.log(movieDB);
-  SqlAPI.saveMovie(movieDB).then((res) => {
-    hideSaveBtn(movie);
-  }).catch(err => {
-    throw err; 
-  })
-}
+  try{
+  await setMovieID(movieDB);
+  console.log(movieID);
+  }
+  catch(err){
+    console.log(err);
+  }
 
-function hideSaveBtn(movie){
-  let moviesTemp = [...movies];
-  moviesTemp.forEach( item => {
-    if(movie.imdbID === item.imdbID)
-    {
-      item.saved = true;
-    }
-  })
-  setMovies(moviesTemp);
-}
-
+ }
 
 
     return ( 
@@ -146,7 +129,7 @@ function hideSaveBtn(movie){
                           {movie.Title} directed by {movie.Director}
                         </strong>
                         {!movie.saved ? (
-                        <SaveBtn onClick={() => saveClick(movie)} />
+                        <SaveBtn onClick={() => movieClick(movie)} />
                         ) : null }
                         <hr></hr>
                     </ListGroupItem>

@@ -45,20 +45,4 @@ const useStoreContext = () => {
     return useContext(StoreContext);
 }
 
-//Create movie context. We can pass movie info thru tunnel to use in any component file
-const MovieContext = createContext();
-// Custom hook to use movie context
-const useMovieContext = () => {
-    return useContext(MovieContext);
-}
-//Movie Provider
-const MovieProvider = ({props}) => {
-    const [movieID, setMovieID] = useState("");
-    return (
-        <MovieContext.Provider value = {{movieID, setMovieID}} >
-            {props}
-        </MovieContext.Provider>
-    )
-}
-
-export { StoreProvider, useStoreContext, MovieProvider, useMovieContext  };
+export { StoreProvider, useStoreContext  }

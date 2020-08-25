@@ -8,7 +8,8 @@ import Library from "./pages/Library";
 import { useStoreContext } from './utils/GlobalStore';
 import API from './utils/API';
 import { AUTH_SET_LOGGED_IN, AUTH_SET_LOGGED_OUT } from "./utils/actions";
-import NavTab from "../src/components/NavTabs"
+import NavTab from "../src/components/NavTabs";
+import {MovieProvider} from "./utils/movieContext";
 
 function App() {
     // Our provider is setup in index.js so we can use the GlobalStore here easily.
@@ -82,6 +83,7 @@ function App() {
                         ) : (
                             // These routes are only available to LOGGED IN users
                             <>
+                            <MovieProvider>
                               <NavTab/>
                                 <Route exact path={["/login","/signup"]}>
                                     {/* If you are logged in, going to the login/signup page will take you to the members page */}
@@ -89,6 +91,7 @@ function App() {
                                 </Route>
                                 <Route exact path="/" component={Members} />
                                 <Route exact path="/library" component={Library} />
+                            </MovieProvider>
                             </>
                             )
                     }

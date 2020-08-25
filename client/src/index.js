@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { StoreProvider, MovieProvider } from './utils/GlobalStore';
+import { StoreProvider} from './utils/GlobalStore';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
     <React.StrictMode>
         <StoreProvider>
-            <MovieProvider>
                 <App />
-            </MovieProvider>
         </StoreProvider>
     </React.StrictMode>,
     document.getElementById('root')
