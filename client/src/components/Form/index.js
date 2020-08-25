@@ -1,19 +1,17 @@
 import React from "react"
-import {Button, Input, FormGroup } from "reactstrap"
+import {Button, Input } from "reactstrap"
 
 
 export function SearchBar(props) {
     return (
-      <FormGroup>
-        <Input className="form-control" {...props} />
-      </FormGroup>
+    
+        <Input className="form-control m-auto" {...props}  style={{ width:"50%", height:"50px",  borderRadius: "20px"}}/>
     );
   }
-  
 
   export function FormBtn(props) {
     return (
-      <Button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
+      <Button {...props} style={{ fontSize: "20px" }} className="btn btn-success m-auto ">
         {props.children}
       </Button>
     );

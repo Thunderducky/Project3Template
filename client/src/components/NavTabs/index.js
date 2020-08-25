@@ -24,7 +24,7 @@ function NavTab () {
               <Nav className="mr-auto" navbar>
                 <NavItem>
       {/* since we have the path setting on App.js we don't need href but I put them on just in case for now. */}
-                  <NavLink href="/Home">Home</NavLink>
+                  <NavLink href="/members">Home</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/library">library</NavLink>
