@@ -27,14 +27,14 @@ function NavTab () {
                   <NavLink href="/Home">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/library">library</NavLink>
+                  <NavLink href="/library">Library</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/wishlist">Wishlist</NavLink>
                 </NavItem>
               </Nav>
               <NavbarText> Hi, {username}</NavbarText> 
-                  <NavLink className="float-right" href="/">Logo out</NavLink>
+                  <NavLink className="float-right" href="/">Log out</NavLink>
 
           </Navbar>
         </div>

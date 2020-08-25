@@ -13,6 +13,20 @@ module.exports = async function (app) {
             console.log(err)
         }
     }),
+    // grabs all movies of specified format
+    app.get("/api/movies/:format", function(req, res) {
+        const uid = req.session.passport.user.id;
+        const format = req.params.format;
+        try{
+            const dbMovie = await db.Movie.findAll({where: {userId: uid, format: format }}, {include: db.User});
+            res.json(dbMovie);
+        }
+        catch(err){
+            res.status(500).end();
+            console.log(err)
+        }
+    }),
+    // grabs movie with specific id
     app.get("/api/movies/:id", function (req, res) {
         const uid = req.session.passport.user.id;
         const id = req.params.id;
