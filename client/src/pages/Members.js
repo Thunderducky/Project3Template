@@ -1,14 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
-import {Jumbotron} from "reactstrap";
 import SqlAPI from "../utils/SQL-API";
-import { Col, Row, Container } from "../components/Grid";
-import {List, ListItem } from "../components/List";
-import {Input} from "../components/Form";
 import SaveBtn from "../components/SaveBtn";
 // import {NavContext} from "../../src/UserContext";
 import "./style.css";
 import OMDbAPI from "../utils/OMDbAPI";
 import useDebounce from "../utils/debounceHook";
+import {
+  TabContent,
+  TabPane,
+  Form,
+  Input,
+  Nav,
+  NavItem,
+  NavLink,
+  Button,
+  Row,
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Jumbotron, 
+  Container
+} from "reactstrap";
 
 
 
@@ -22,7 +34,7 @@ const [formObject, setFormObject] = useState({
   synopsis: ""
 })
 
-const debouncedSearchTerm = useDebounce(formObject, 5000);
+const debouncedSearchTerm = useDebounce(formObject, 800);
   // Load all movies and store them with setMovies
   useEffect( () => {
     if(!formObject.title && !formObject.director){
@@ -102,7 +114,7 @@ function hideSaveBtn(movie){
           
            
             <label className = "label">Search by title or...: </label>
-            <form>
+            <Form>
               <Input
                 onChange={handleInputChange}
                 name="title"
@@ -113,7 +125,7 @@ function hideSaveBtn(movie){
                 name="Director"
                 placeholder="Director"
               />
-            </form>
+            </Form>
             </Col>
           </Row>
           
@@ -123,10 +135,10 @@ function hideSaveBtn(movie){
               <div>
               <label className = "label">Click "💾" to save movies to your library!</label>
               
-              <List>
+              <ListGroup>
                 {movies.map(movie => {
                   return (
-                    <ListItem key={movie.id}>
+                    <ListGroupItem key={movie.id}>
                       {(movie.Poster) ? (
                       <img className = "movie-img pr-2" src = {movie.Poster } />) : 
                      (<h3>Image Unavailable</h3>)}
@@ -137,10 +149,10 @@ function hideSaveBtn(movie){
                         <SaveBtn onClick={() => saveClick(movie)} />
                         ) : null }
                         <hr></hr>
-                    </ListItem>
+                    </ListGroupItem>
                   );
                 })}
-              </List>
+              </ListGroup>
               </div>
             ) : (
               <h3 className = "label">No Results to Display</h3>
