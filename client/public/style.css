@@ -1,4 +1,8 @@
+body, html {
+    width: 100%;
+    height: 100%;
 
+}
 nav{
     font-size: large;
 }
@@ -8,12 +12,6 @@ nav{
     margin-top: auto;
 }
 
-.welcome {
-    margin-top: 50px;
-    opacity: 0;
-}
-
-
-.welcome:hover {
-    opacity: 1;
+a{
+    font-size: 20px;
 }

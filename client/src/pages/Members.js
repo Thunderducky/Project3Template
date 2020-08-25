@@ -92,7 +92,7 @@ function hideSaveBtn(movie){
 
     return ( 
       <div>
-      <Jumbotron>
+    <Jumbotron>
       <h1 className ="hdr">SEARCH FOR MOVIES!</h1>
     </Jumbotron>
     
