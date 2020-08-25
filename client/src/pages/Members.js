@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Jumbotron from "../components/Jumbotron";
+import {Jumbotron} from "reactstrap";
 import SqlAPI from "../utils/SQL-API";
 import { Col, Row, Container } from "../components/Grid";
 import {List, ListItem } from "../components/List";

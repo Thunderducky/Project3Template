@@ -5,6 +5,9 @@ export default {
   getMovies: function() {
     return axios.get("/api/movies");
   },
+  getMoviesByFormat: function(format) {
+    return axios.get("/api/movies/" + format);
+  },
   // Gets the movie with the given id
   getMovie: function(id) {
     return axios.get("/api/movies/" + id);
