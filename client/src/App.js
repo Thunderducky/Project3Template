@@ -85,9 +85,9 @@ function App() {
                               <NavTab/>
                                 <Route exact path={["/login","/signup"]}>
                                     {/* If you are logged in, going to the login/signup page will take you to the members page */}
-                                    <Redirect to="/members" />
+                                    <Redirect to="/" />
                                 </Route>
-                                <Route exact path="/members" component={Members} />
+                                <Route exact path="/" component={Members} />
                                 <Route exact path="/library" component={Library} />
                             </>
                             )
