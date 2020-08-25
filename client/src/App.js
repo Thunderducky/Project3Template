@@ -56,7 +56,7 @@ function App() {
                             <div className="container-fluid">
                                 <div className="row text-center">
                                     <div className="col-md-12 welcome">
-                                <h1>Welcome our Vitual library!</h1> &nbsp;&nbsp;&nbsp;
+                                <h1>Welcome to the Virtual Movie Library!</h1> &nbsp;&nbsp;&nbsp;
                                 <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
                                     </div>
                                 </div>

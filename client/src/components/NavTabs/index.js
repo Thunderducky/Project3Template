@@ -20,7 +20,7 @@ function NavTab () {
         <div>
     
           <Navbar color="dark" dark expand="lg" fixex="top">
-            <NavbarBrand href="/">Movie Librariran</NavbarBrand>
+            <NavbarBrand href="/">Movie Librarian</NavbarBrand>
               <Nav className="mr-auto" navbar>
                 <NavItem>
       {/* since we have the path setting on App.js we don't need href but I put them on just in case for now. */}
