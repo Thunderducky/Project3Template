@@ -1,5 +1,7 @@
 import React from "react";
 import { useStoreContext } from "../../utils/GlobalStore"
+import API from "../../utils/API";
+import { AUTH_SET_LOGGED_OUT } from "../../utils/actions";
 import {
     Navbar,
     NavbarBrand,
@@ -14,8 +16,17 @@ function NavTab () {
     // const [isOpen, setIsOpen] = useState(false);
   
     // const toggle = () => setIsOpen(!isOpen);
-    const [state] = useStoreContext();
+    const [state, dispatch] = useStoreContext();
     const { username } = state;
+
+    const logout = () => {
+      API.logout().then(() => {
+          dispatch({
+              type: AUTH_SET_LOGGED_OUT
+          })
+      })
+  }
+
     return (
         <div>
     
@@ -34,7 +45,7 @@ function NavTab () {
                 </NavItem>
               </Nav>
               <NavbarText> Hi, {username}</NavbarText> 
-                  <NavLink className="float-right" href="/">Log out</NavLink>
+                  <NavLink className="float-right" onClick={() => logout() } href="/logout">Log out</NavLink>
 
           </Navbar>
         </div>

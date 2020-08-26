@@ -60,7 +60,6 @@ function MovieDetail(props) {
           format: this.ref,
           wishlist: true
       }
-
       saveMovie(movieObject);
   }
 
