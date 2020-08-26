@@ -72,11 +72,10 @@ const LibraryTab = () => {
     }
   };
 
-  const handleDelete = function(id, e) {
-    // e.preventDefault();
-    // SqlAPI.deleteMovie(id)
-    // moviesArray.splice(moviesArray.findIndex(element => element.id === id), 1);
-  }
+  // const handleDelete = function(id) {
+  //   SqlAPI.deleteMovie(id)
+  //   moviesArray.splice(moviesArray.findIndex(element => element.id === id), 1);
+  // }
 
   return (
     <div>
@@ -155,7 +154,7 @@ const LibraryTab = () => {
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
                               <br />
-                              <Button className="deleteBtn" outline color="danger" size="sm" onClick={handleDelete(movie.id)}>Remove from Shelf</Button>
+                              <Button className="deleteBtn" outline color="danger" size="sm" value={movie.id} >Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
@@ -189,7 +188,7 @@ const LibraryTab = () => {
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
                               <br />
-                              <Button className="deleteBtn" outline color="danger" size="sm" onClick={handleDelete(movie.id)}>Remove from Shelf</Button>
+                              <Button className="deleteBtn" outline color="danger" size="sm" value={movie.id} >Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
@@ -223,7 +222,7 @@ const LibraryTab = () => {
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
                               <br />
-                              <Button className="deleteBtn" outline color="danger" size="sm" onClick={handleDelete(movie.id)}>Remove from Shelf</Button>
+                              <Button className="deleteBtn" outline color="danger" size="sm" value={movie.id} >Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
@@ -257,7 +256,7 @@ const LibraryTab = () => {
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
                               <br />
-                              <Button className="deleteBtn" outline color="danger" size="sm" onClick={handleDelete(movie.id)}>Remove from Shelf</Button>
+                              <Button className="deleteBtn" outline color="danger" size="sm" value={movie.id} >Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
