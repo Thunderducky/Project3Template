@@ -28,20 +28,17 @@ function Members() {
   // Setting our component's initial state
 const [movies, setMovies] = useState([]);
 const [formObject, setFormObject] = useState({
-  title: "",
-  director: "",
-  year: "",
-  synopsis: ""
+  title: ""
 })
 
 const debouncedSearchTerm = useDebounce(formObject, 800);
   // Load all movies and store them with setMovies
   useEffect( () => {
-    if(!formObject.title && !formObject.director){
+    if(!formObject.title){
       return;
     }
     if(debouncedSearchTerm){
-      getMovies(formObject.title, formObject.director).then(res => {
+      getMovies(formObject.title).then(res => {
         if(res!== undefined && res.length !== 0){
           res.forEach(element => {
             element.saved = false;
@@ -54,7 +51,7 @@ const debouncedSearchTerm = useDebounce(formObject, 800);
   }, [debouncedSearchTerm])
 
   // Loads all movies and sets state to movies that match search
-  async function getMovies(title, director) {
+  async function getMovies(title) {
     try{
       let res = await OMDbAPI.searchMovies(title);
       console.log(res.data);
@@ -105,35 +102,28 @@ function hideSaveBtn(movie){
     return ( 
       <div>
     <Jumbotron>
-      <h1 className ="hdr">SEARCH FOR MOVIES!</h1>
+      <h1 className ="hdr text-center">SEARCH FOR MOVIES!</h1>
     </Jumbotron>
     
-      <Container fluid>
+      <Container>
         <Row>
-          <Col size = "12">
-          
-           
-            <label className = "label">Search by title or...: </label>
+          <Col className="text-center" size = "6">
+            <label className = "label">Search by title </label>
             <Form>
               <Input
                 onChange={handleInputChange}
                 name="title"
                 placeholder="Title"
               />
-              <Input
-                onChange={handleInputChange}
-                name="Director"
-                placeholder="Director"
-              />
             </Form>
             </Col>
           </Row>
           
           <Row>
-          <Col size = "12">
+          <Col md="12">
             {movies.length ? (
               <div>
-              <label className = "label">Click "💾" to save movies to your library!</label>
+              <label className = "label">Click "🔍" to see detail!</label>
               
               <ListGroup>
                 {movies.map(movie => {
@@ -143,7 +133,7 @@ function hideSaveBtn(movie){
                       <img className = "movie-img pr-2" src = {movie.Poster } />) : 
                      (<h3>Image Unavailable</h3>)}
                         <strong>
-                          {movie.Title} directed by {movie.Director}
+                          {movie.Title} 
                         </strong>
                         {!movie.saved ? (
                         <SaveBtn onClick={() => saveClick(movie)} />
