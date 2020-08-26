@@ -24,13 +24,15 @@ import {
 function Members() {
   // Setting our component's initial state
 const [movies, setMovies] = useState([]);
-const [formObject, setFormObject] = useState({
-  title: ""
-})
+const [formObject, setFormObject] = useState({title: ""});
+
+const [state, dispatch] = useMovieContext();
+const history = useHistory();
 
 const debouncedSearchTerm = useDebounce(formObject, 800);
   // Load all movies and store them with setMovies
   useEffect( () => {
+    console.log(state);
     if(!formObject.title){
       return;
     }
@@ -85,13 +87,15 @@ const handleClick = (movie) => {
     return ( 
       <div>
     <Jumbotron>
-      <h1 className ="hdr text-center">SEARCH FOR MOVIES!</h1>
+      <h1 className ="hdr">SEARCH FOR MOVIES!</h1>
     </Jumbotron>
     
-      <Container>
+      <Container fluid>
         <Row>
-          <Col className="text-center" size = "6">
-            <label className = "label">Search by title </label>
+          <Col size = "12">
+          
+           
+            <label className = "label">Search by title or...: </label>
             <Form>
               <Input
                 onChange={handleInputChange}
@@ -103,10 +107,10 @@ const handleClick = (movie) => {
           </Row>
           
           <Row>
-          <Col md="12">
+          <Col size = "12">
             {movies.length ? (
               <div>
-              <label className = "label">Click "🔍" to see detail!</label>
+              <label className = "label">Click "View Info" to view details and save the respecitive movie to your movie shelf!</label>
               
               <ListGroup>
                 {movies.map(movie => {
@@ -116,7 +120,7 @@ const handleClick = (movie) => {
                       <img className = "movie-img pr-2" src = {movie.Poster } />) : 
                      (<h3>Image Unavailable</h3>)}
                         <strong>
-                          {movie.Title} 
+                          {movie.Title}
                         </strong>
                         {!movie.saved ? (
                         <SaveBtn onClick={() => handleClick(movie)} />
