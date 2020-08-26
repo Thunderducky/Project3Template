@@ -4,6 +4,7 @@ import classnames from "classnames";
 import SqlAPI from "../utils/SQL-API";
 import OMDbAPI from "../utils/OMDbAPI";
 import { useMovieContext } from "../utils/movieContext";
+import {MOVIE_ID} from "../utils/actions";
 
 function MovieDetail(props) {
   const [movieState, dispatchMovie] = useMovieContext();
@@ -17,12 +18,23 @@ function MovieDetail(props) {
   });
 
   useEffect(() => {
-    console.log(movieState);
-    retrieveMovie(movieState).then((res) => {
+ 
+    if(movieState.Title){
+      localStorage.setItem("movie", JSON.stringify(movieState));
+      console.log(movieState);
+      retrieveMovie(movieState).then((res) => {
       console.log(res);
-      setMovie(res);
-      console.log(movie);
-    });
+      setMovie(res); 
+      })
+    }
+    else if(localStorage.getItem("movie")){
+      const getStor = JSON.parse(localStorage.getItem("movie"));
+      console.log(getStor);  
+      retrieveMovie(getStor).then((res) => {
+      console.log(res);
+      setMovie(res);  
+      })
+    }        
   }, []);
 
   const retrieveMovie = async (movie) => {
