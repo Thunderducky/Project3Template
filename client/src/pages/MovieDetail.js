@@ -65,8 +65,10 @@ function MovieDetail(props) {
           format: this.value,
           wishlist: false
       }
+
       console.log(movieObject);
       saveMovieToDB(movieObject).then((res) => console.log(res));
+
   }
 
   const handleHide = function(e) {
