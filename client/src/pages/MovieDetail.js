@@ -46,8 +46,13 @@ function MovieDetail(props) {
     }
   }
 
-  const saveMovie = async (movieData) => {
-      SqlAPI.saveMovie(movieData)
+  const saveMovieToDB = async (movieData) => {
+    try {
+      await SqlAPI.saveMovie(movieData)
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
 
   const handleSave = function(e) {
@@ -57,10 +62,13 @@ function MovieDetail(props) {
           poster: movie.Poster,
           year: movie.Year,
           synopsis: movie.Plot,
-          format: this.ref,
-          wishlist: true
+          format: this.value,
+          wishlist: false
       }
-      saveMovie(movieObject);
+
+      console.log(movieObject);
+      saveMovieToDB(movieObject).then((res) => console.log(res));
+
   }
 
   const handleHide = function(e) {
@@ -82,9 +90,9 @@ function MovieDetail(props) {
         <br />
         <h3>Own it? Click the formats you own</h3>
         <br />
-        <Button left="true" color="success" ref= {useRef("DVD")} onClick={handleSave}>DVD</Button>
-        <Button left="true" color="primary" ref= {useRef("BluRay")} onClick={handleSave}>Blu-Ray</Button>
-        <Button left="true" color="warning" ref= {useRef("VOD")} onClick={handleSave}>VOD</Button>
+        <Button left="true" color="success" value="DVD" onClick={handleSave}>DVD</Button>
+        <Button left="true" color="primary" value="BluRay" onClick={handleSave}>Blu-Ray</Button>
+        <Button left="true" color="warning" value="VOD" onClick={handleSave}>VOD</Button>
       </Media>
     </Media>
   );
