@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -10,6 +10,7 @@ import API from './utils/API';
 import { AUTH_SET_LOGGED_IN, AUTH_SET_LOGGED_OUT } from "./utils/actions";
 import NavTab from "../src/components/NavTabs";
 import {MovieProvider} from "./utils/movieContext";
+import MovieDetail from "./pages/MovieDetail";
 
 function App() {
     // Our provider is setup in index.js so we can use the GlobalStore here easily.
@@ -91,6 +92,7 @@ function App() {
                                 </Route>
                                 <Route exact path="/" component={Members} />
                                 <Route exact path="/library" component={Library} />
+                                <Route exact path="/movieDetail" component={MovieDetail} />
                             </MovieProvider>
                             </>
                             )

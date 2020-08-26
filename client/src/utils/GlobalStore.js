@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, useState } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 import { AUTH_SET_LOGGED_OUT, AUTH_SET_LOGGED_IN } from "./actions";
 
 const StoreContext = createContext();

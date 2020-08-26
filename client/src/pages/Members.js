@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import SaveBtn from "../components/SaveBtn";
+import { useHistory } from 'react-router-dom';
 // import {NavContext} from "../../src/UserContext";
 import "./style.css";
 import OMDbAPI from "../utils/OMDbAPI";
 import useDebounce from "../utils/debounceHook";
-import {MovieContext} from "../utils/movieContext";
+import {useMovieContext} from "../utils/movieContext";
+import {MOVIE_ID} from "../utils/actions";
 import {
   Form,
   Input,
@@ -24,16 +26,13 @@ function Members() {
 const [movies, setMovies] = useState([]);
 const [formObject, setFormObject] = useState({title: ""});
 
-const MovieContextFn = () => {
-const passMovie = useContext(MovieContext);
-return passMovie;
-} 
-const {movieID, setMovieID} = MovieContextFn()
-
+const [state, dispatch] = useMovieContext();
+const history = useHistory();
 
 const debouncedSearchTerm = useDebounce(formObject, 800);
   // Load all movies and store them with setMovies
   useEffect( () => {
+    console.log(state);
     if(!formObject.title){
       return;
     }
@@ -48,7 +47,7 @@ const debouncedSearchTerm = useDebounce(formObject, 800);
         }
       })
     }
-  }, [debouncedSearchTerm])
+  }, [debouncedSearchTerm, state])
 
   // Loads all movies and sets state to movies that match search
   async function getMovies(title) {
@@ -69,18 +68,18 @@ function handleInputChange(event) {
   console.log(formObject);
 };
 
-async function movieClick(movie){
-  var movieDB = {
-  title: movie.Title,
-  id: movie.imdbID
-  }
-  try{
-  await setMovieID(movieDB);
-  console.log(movieID);
-  }
-  catch(err){
-    console.log(err);
-  }
+const handleClick = (movie) => {
+  if(movie.imdbID && movie.Title){
+  dispatch({
+    type: MOVIE_ID,
+    data: {
+      Title: movie.Title, 
+      imdbID: movie.imdbID
+    }
+  })
+  history.push("/movieDetail");
+  
+}
 
  }
 
@@ -103,11 +102,6 @@ async function movieClick(movie){
                 name="title"
                 placeholder="Title"
               />
-              <Input
-                onChange={handleInputChange}
-                name="Director"
-                placeholder="Director"
-              />
             </Form>
             </Col>
           </Row>
@@ -116,20 +110,20 @@ async function movieClick(movie){
           <Col size = "12">
             {movies.length ? (
               <div>
-              <label className = "label">Click "💾" to save movies to your library!</label>
+              <label className = "label">Click "View Info" to view details and save the respecitive movie to your movie shelf!</label>
               
               <ListGroup>
                 {movies.map(movie => {
                   return (
-                    <ListGroupItem key={movie.id}>
+                    <ListGroupItem key={movie.imdbID}>
                       {(movie.Poster) ? (
                       <img className = "movie-img pr-2" src = {movie.Poster } />) : 
                      (<h3>Image Unavailable</h3>)}
                         <strong>
-                          {movie.Title} directed by {movie.Director}
+                          {movie.Title}
                         </strong>
                         {!movie.saved ? (
-                        <SaveBtn onClick={() => movieClick(movie)} />
+                        <SaveBtn onClick={() => handleClick(movie)} />
                         ) : null }
                         <hr></hr>
                     </ListGroupItem>
