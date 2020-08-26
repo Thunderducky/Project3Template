@@ -41,7 +41,7 @@ module.exports = function (app) {
           });
     }),
     // grabs movie with specific id
-    app.get("/api/movies/:id", async function (req, res) {
+    app.get("/api/movies/:id", function (req, res) {
       const uid = req.user.id;
       const id = req.params.id;
       db.Movie.findOne(
@@ -54,16 +54,18 @@ module.exports = function (app) {
             console.log(req.body)
           });
     }),
-    app.post("/api/movies", function (req, res) {
-      const uid = req.user.id;
-      req.body.UserId = uid;
-      console.log(req.body);
-      db.Movie.create(req.body).then(function(dbMovie) {
-        res.json(dbMovie);
-      }).catch(function(err) {
-        res.status(500).json(err);
-        console.log(req.body)
-      });
+    app.post("/api/movies", async function (req, res) {
+        try{
+            const uid = req.user.id;
+            req.body.UserId = uid;
+            console.log(req.body);
+            let dbMovie = await db.Movie.create(req.body);
+            res.json(dbMovie);
+        }
+        catch(err) {
+            res.status(500).json(err);
+            console.log(req.body)
+      };
     }),
     app.delete("/api/movies/:id", function (req, res) {
       db.Movie.destroy({
