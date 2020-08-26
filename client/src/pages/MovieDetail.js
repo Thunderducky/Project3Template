@@ -48,7 +48,7 @@ function MovieDetail(props) {
 
   const saveMovieToDB = async (movieData) => {
     try {
-      await SqlAPI.saveMovie(movieData)
+      await SqlAPI.saveMovie(movieData);
     }
     catch(err) {
       console.log(err);
@@ -67,7 +67,7 @@ function MovieDetail(props) {
       }
 
       console.log(movieObject);
-      saveMovieToDB(movieObject).then((res) => console.log(res));
+      saveMovieToDB(movieObject);
 
   }
 

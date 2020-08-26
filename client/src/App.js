@@ -66,8 +66,7 @@ function App() {
                         ) : (
                             // If the user is Logged In
                             <>
-                                <b>Welcome {state.email}!</b> &nbsp;&nbsp;&nbsp;
-                                <Link to="/members">Members</Link> | <a onClick={() => logout() }href="/logout">Logout</a>
+                               <NavTab/> 
                             </>
                         )
                         }
@@ -85,7 +84,7 @@ function App() {
                             // These routes are only available to LOGGED IN users
                             <>
                             <MovieProvider>
-                              <NavTab/>
+                              
                                 <Route exact path={["/login","/signup"]}>
                                     {/* If you are logged in, going to the login/signup page will take you to the members page */}
                                     <Redirect to="/" />
