@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.get("/api/movies", async function (req, res) {
     const uid = req.user.id;
       db.Movie.findAll(
-        { where: { UserId: uid } },
+        { where: { UserId: uid, wishlist: false} },
         { include: db.User }
       ).then(function(dbMovie) {
         res.json(dbMovie);

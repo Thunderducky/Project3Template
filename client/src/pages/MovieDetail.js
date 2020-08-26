@@ -53,7 +53,9 @@ function MovieDetail(props) {
       format: this.value,
       wishlist: false,
     };
-
+    if (this.wish === "wishlist") {
+      movieObject.wishlist = true;
+    }
     console.log(movieObject);
     saveMovieToDB(movieObject);
   };
@@ -78,7 +80,7 @@ function MovieDetail(props) {
 
   return (
     <div>
-      <h2 className="detailHeader"><strong>Movie Details</strong></h2>
+      <h1 className="detailHeader"><strong>Movie Details</strong></h1>
       <Media className="movieDetail">
         <Media left>
           <Media
@@ -89,11 +91,10 @@ function MovieDetail(props) {
           />
         </Media>
         <Media body className="movieBody">
-          <Media heading>{movie.Title}</Media>
+          <Media heading className="title"><h2><strong>{movie.Title} {'\('+ movie.Year + '\)'}</strong></h2></Media>
           {handleSynopsis(movie.Plot)}
-          <br />
+          <hr />
           <h3>Own it? Click the formats you own</h3>
-          <br />
           <Button
             className="formatBtn"
             left="true"
@@ -120,6 +121,18 @@ function MovieDetail(props) {
             onClick={handleSave}
           >
             VOD
+          </Button>
+          <hr />
+          <h3>Want to own it?</h3>
+          <Button
+            className="formatBtn"
+            left="true"
+            outline 
+            color="primary"
+            wish="wishlist"
+            onClick={handleSave}
+          >
+            Add to Wishlist
           </Button>
         </Media>
       </Media>
