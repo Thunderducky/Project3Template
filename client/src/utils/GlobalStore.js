@@ -45,4 +45,4 @@ const useStoreContext = () => {
     return useContext(StoreContext);
 }
 
-export { StoreProvider, useStoreContext };
+export { StoreProvider, useStoreContext  }

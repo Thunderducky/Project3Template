@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import SqlAPI from "../utils/SQL-API";
 import SaveBtn from "../components/SaveBtn";
+import { useHistory } from 'react-router-dom';
 // import {NavContext} from "../../src/UserContext";
 import "./style.css";
 import OMDbAPI from "../utils/OMDbAPI";
 import useDebounce from "../utils/debounceHook";
+import {useMovieContext} from "../utils/movieContext";
+import {MOVIE_ID} from "../utils/actions";
 import {
-  TabContent,
-  TabPane,
   Form,
   Input,
-  Nav,
-  NavItem,
-  NavLink,
   Button,
   Row,
   Col,
@@ -27,21 +24,20 @@ import {
 function Members() {
   // Setting our component's initial state
 const [movies, setMovies] = useState([]);
-const [formObject, setFormObject] = useState({
-  title: "",
-  director: "",
-  year: "",
-  synopsis: ""
-})
+const [formObject, setFormObject] = useState({title: ""});
+
+const [state, dispatch] = useMovieContext();
+const history = useHistory();
 
 const debouncedSearchTerm = useDebounce(formObject, 800);
   // Load all movies and store them with setMovies
   useEffect( () => {
-    if(!formObject.title && !formObject.director){
+    console.log(state);
+    if(!formObject.title){
       return;
     }
     if(debouncedSearchTerm){
-      getMovies(formObject.title, formObject.director).then(res => {
+      getMovies(formObject.title).then(res => {
         if(res!== undefined && res.length !== 0){
           res.forEach(element => {
             element.saved = false;
@@ -51,10 +47,10 @@ const debouncedSearchTerm = useDebounce(formObject, 800);
         }
       })
     }
-  }, [debouncedSearchTerm])
+  }, [debouncedSearchTerm, state])
 
   // Loads all movies and sets state to movies that match search
-  async function getMovies(title, director) {
+  async function getMovies(title) {
     try{
       let res = await OMDbAPI.searchMovies(title);
       console.log(res.data);
@@ -72,34 +68,20 @@ function handleInputChange(event) {
   console.log(formObject);
 };
 
-function saveClick(movie){
-  var movieDB = {
-  title: movie.Title,
-  poster: movie.Poster,
-  year: movie.Year,
-  synopsis: movie.synopsis,
-  format: movie.format,
-  wishlist: movie.wishlist
-  }
-  console.log(movieDB);
-  SqlAPI.saveMovie(movieDB).then((res) => {
-    hideSaveBtn(movie);
-  }).catch(err => {
-    throw err; 
-  })
-}
-
-function hideSaveBtn(movie){
-  let moviesTemp = [...movies];
-  moviesTemp.forEach( item => {
-    if(movie.imdbID === item.imdbID)
-    {
-      item.saved = true;
+const handleClick = (movie) => {
+  if(movie.imdbID && movie.Title){
+  dispatch({
+    type: MOVIE_ID,
+    data: {
+      Title: movie.Title, 
+      imdbID: movie.imdbID
     }
   })
-  setMovies(moviesTemp);
+  history.push("/movieDetail");
+  
 }
 
+ }
 
 
     return ( 
@@ -120,11 +102,6 @@ function hideSaveBtn(movie){
                 name="title"
                 placeholder="Title"
               />
-              <Input
-                onChange={handleInputChange}
-                name="Director"
-                placeholder="Director"
-              />
             </Form>
             </Col>
           </Row>
@@ -133,20 +110,20 @@ function hideSaveBtn(movie){
           <Col size = "12">
             {movies.length ? (
               <div>
-              <label className = "label">Click "💾" to save movies to your library!</label>
+              <label className = "label">Click "View Info" to view details and save the respecitive movie to your movie shelf!</label>
               
               <ListGroup>
                 {movies.map(movie => {
                   return (
-                    <ListGroupItem key={movie.id}>
+                    <ListGroupItem key={movie.imdbID}>
                       {(movie.Poster) ? (
                       <img className = "movie-img pr-2" src = {movie.Poster } />) : 
                      (<h3>Image Unavailable</h3>)}
                         <strong>
-                          {movie.Title} directed by {movie.Director}
+                          {movie.Title}
                         </strong>
                         {!movie.saved ? (
-                        <SaveBtn onClick={() => saveClick(movie)} />
+                        <SaveBtn onClick={() => handleClick(movie)} />
                         ) : null }
                         <hr></hr>
                     </ListGroupItem>
