@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import SqlAPI from "../utils/SQL-API";
 import SaveBtn from "../components/SaveBtn";
+import { useHistory } from 'react-router-dom';
 // import {NavContext} from "../../src/UserContext";
 import "./style.css";
 import OMDbAPI from "../utils/OMDbAPI";
 import useDebounce from "../utils/debounceHook";
+import {useMovieContext} from "../utils/movieContext";
+import {MOVIE_ID} from "../utils/actions";
 import {
-  TabContent,
-  TabPane,
   Form,
   Input,
-  Nav,
-  NavItem,
-  NavLink,
   Button,
   Row,
   Col,
@@ -48,7 +45,7 @@ const debouncedSearchTerm = useDebounce(formObject, 800);
         }
       })
     }
-  }, [debouncedSearchTerm])
+  }, [debouncedSearchTerm, state])
 
   // Loads all movies and sets state to movies that match search
   async function getMovies(title) {
@@ -69,34 +66,20 @@ function handleInputChange(event) {
   console.log(formObject);
 };
 
-function saveClick(movie){
-  var movieDB = {
-  title: movie.Title,
-  poster: movie.Poster,
-  year: movie.Year,
-  synopsis: movie.synopsis,
-  format: movie.format,
-  wishlist: movie.wishlist
-  }
-  console.log(movieDB);
-  SqlAPI.saveMovie(movieDB).then((res) => {
-    hideSaveBtn(movie);
-  }).catch(err => {
-    throw err; 
-  })
-}
-
-function hideSaveBtn(movie){
-  let moviesTemp = [...movies];
-  moviesTemp.forEach( item => {
-    if(movie.imdbID === item.imdbID)
-    {
-      item.saved = true;
+const handleClick = (movie) => {
+  if(movie.imdbID && movie.Title){
+  dispatch({
+    type: MOVIE_ID,
+    data: {
+      Title: movie.Title, 
+      imdbID: movie.imdbID
     }
   })
-  setMovies(moviesTemp);
+  history.push("/movieDetail");
+  
 }
 
+ }
 
 
     return ( 
@@ -128,7 +111,7 @@ function hideSaveBtn(movie){
               <ListGroup>
                 {movies.map(movie => {
                   return (
-                    <ListGroupItem key={movie.id}>
+                    <ListGroupItem key={movie.imdbID}>
                       {(movie.Poster) ? (
                       <img className = "movie-img pr-2" src = {movie.Poster } />) : 
                      (<h3>Image Unavailable</h3>)}
@@ -136,7 +119,7 @@ function hideSaveBtn(movie){
                           {movie.Title} 
                         </strong>
                         {!movie.saved ? (
-                        <SaveBtn onClick={() => saveClick(movie)} />
+                        <SaveBtn onClick={() => handleClick(movie)} />
                         ) : null }
                         <hr></hr>
                     </ListGroupItem>

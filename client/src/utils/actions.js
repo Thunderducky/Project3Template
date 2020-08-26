@@ -1,2 +1,3 @@
 export const AUTH_SET_LOGGED_IN = "AUTH_SET_LOGGED_IN";
 export const AUTH_SET_LOGGED_OUT = "AUTH_SET_LOGGED_OUT";
+export const MOVIE_ID = "MOVIE_ID";

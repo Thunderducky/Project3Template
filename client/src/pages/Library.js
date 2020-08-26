@@ -19,17 +19,19 @@ import SqlAPI from "../utils/SQL-API";
 import "./library.css";
 
 const LibraryTab = () => {
+  var moviesArray = [];
   const [activeTab, setActiveTab] = useState("All");
+  const [movieList, setMovieList] = useState(moviesArray);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  var moviesArray = [];
+  
 
   useEffect(() => {
     retrieveMovies(activeTab);
-  }, [activeTab]);
+  }, [activeTab, movieList]);
 
   const retrieveMovies = async (tab) => {
     try {
@@ -38,21 +40,25 @@ const LibraryTab = () => {
           moviesArray = [];
           const allMovies = await SqlAPI.getMovies();
           allMovies.forEach((movie) => moviesArray.push(movie));
+          setMovieList(moviesArray);
           break;
         case "DVD":
           moviesArray = [];
           const dvdMovies = await SqlAPI.getMoviesByFormat("DVD");
           dvdMovies.forEach((movie) => moviesArray.push(movie));
+          setMovieList(moviesArray);
           break;
         case "Blu-Ray":
           moviesArray = [];
           const brMovies = await SqlAPI.getMoviesByFormat("BluRay");
           brMovies.forEach((movie) => moviesArray.push(movie));
+          setMovieList(moviesArray);
           break;
         case "VOD":
           moviesArray = [];
           const vodMovies = await SqlAPI.getMoviesByFormat("VOD");
           vodMovies.forEach((movie) => moviesArray.push(movie));
+          setMovieList(moviesArray);
           break;
         default:
           break;
@@ -61,6 +67,12 @@ const LibraryTab = () => {
       throw err;
     }
   };
+
+  const handleDelete = function(id, e) {
+    e.preventDefault();
+    SqlAPI.deleteMovie(id)
+    moviesArray.splice(moviesArray.findIndex(element => element.id === id), 1);
+  }
 
   return (
     <div>
@@ -124,7 +136,7 @@ const LibraryTab = () => {
               <Row>
                 <Col sm="12">
                   <ListGroup>
-                    {moviesArray.map((movie) => (
+                    {movieList.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
                           <Media>
@@ -138,7 +150,7 @@ const LibraryTab = () => {
                             <Media body>
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
-                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                              <Button outline color="danger" size="sm" onclick={handleDelete(movie.id)}>Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
@@ -157,7 +169,7 @@ const LibraryTab = () => {
               <Row>
                 <Col sm="12">
                   <ListGroup>
-                    {moviesArray.map((movie) => (
+                    {movieList.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
                           <Media>
@@ -171,7 +183,7 @@ const LibraryTab = () => {
                             <Media body>
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
-                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                              <Button outline color="danger" size="sm" onclick={handleDelete(movie.id)}>Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
@@ -190,7 +202,7 @@ const LibraryTab = () => {
               <Row>
                 <Col sm="12">
                   <ListGroup>
-                    {moviesArray.map((movie) => (
+                    {movieList.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
                           <Media>
@@ -204,7 +216,7 @@ const LibraryTab = () => {
                             <Media body>
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
-                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                              <Button outline color="danger" size="sm" onclick={handleDelete(movie.id)}>Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
@@ -223,7 +235,7 @@ const LibraryTab = () => {
               <Row>
                 <Col sm="12">
                   <ListGroup>
-                    {moviesArray.map((movie) => (
+                    {movieList.map((movie) => (
                       <Row>
                         <ListGroupItem key={movie.id}>
                           <Media>
@@ -237,7 +249,7 @@ const LibraryTab = () => {
                             <Media body>
                               <Media heading>{movie.title}</Media>
                               {movie.synopsis}
-                              <Button outline color="danger" size="sm">Remove from Shelf</Button>
+                              <Button outline color="danger" size="sm" onclick={handleDelete(movie.id)}>Remove from Shelf</Button>
                             </Media>
                           </Media>
                         </ListGroupItem>
