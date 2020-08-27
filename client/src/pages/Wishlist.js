@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import SqlAPI from "../utils/SQL-API";
+import "./wishlist.css";
 
 
 const WishlistTab = () => {
@@ -74,7 +75,7 @@ const WishlistTab = () => {
           </Col>
         </Row>
         <Row>
-          <Col sm="12">
+          <Col className="wishList" sm="8">
             <ListGroup>
               {(movieList) ? movieList.map((movie) => (
                 <Row>
@@ -91,7 +92,7 @@ const WishlistTab = () => {
                         <Media heading><strong>{movie.title} {'\('+movie.year+'\)'} {renderBadges(movie)}</strong></Media>
                         {movie.synopsis}
                         <br />
-                        <Button className="deleteBtn" outline color="danger" size="sm" id={movie.id} onClick={handleDelete}>Remove from Shelf</Button>
+                        <Button className="deleteBtn" outline color="danger" size="sm" id={movie.id} onClick={handleDelete}>Remove from Wishlist</Button>
                       </Media>
                     </Media>
                   </ListGroupItem>
