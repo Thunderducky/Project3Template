@@ -26,6 +26,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       
     },
+    director: {
+      type: DataTypes.STRING
+    },
+    cast: {
+      type: DataTypes.STRING
+    },
     format: {
       type: DataTypes.STRING,
       allowNull: true
