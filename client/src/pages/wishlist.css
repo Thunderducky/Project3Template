@@ -38,3 +38,29 @@
     width: auto;
     margin-left: 50px
 }
+
+.wishList {
+    align-content: center;
+    margin: 25px auto;
+}
+
+@media (min-width: 576px) {
+    .largePoster {
+        height: 200px;
+        width: auto;
+        margin-left: 20px;
+    }
+
+    .movieDetail {
+        height: 250px;
+        width: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .largePoster {
+        height: 450px;
+        width: auto;
+        margin-left: 50px;
+    }
+}

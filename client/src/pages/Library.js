@@ -85,7 +85,7 @@ const LibraryTab = () => {
       case "DVD":
         return <Badge color="success" pill>DVD</Badge>
       case "BluRay":
-        return <Badge color="primary" pill>BluRay</Badge>
+        return <Badge color="primary" pill>Blu-Ray</Badge>
       case "VOD":
         return <Badge color="warning" pill>VOD</Badge>
       default:
