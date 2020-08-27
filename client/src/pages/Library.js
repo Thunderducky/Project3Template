@@ -167,7 +167,7 @@ const LibraryTab = () => {
                               />
                             </Media>
                             <Media body className="movieBody">
-                              <Media heading><strong>{movie.title} {'\('+movie.year+'\)'} {renderBadges(movie)}</strong></Media>
+                              <Media heading><strong>{movie.title} {'('+movie.year+')'} {renderBadges(movie)}</strong></Media>
                               {movie.synopsis}
                               <br />
                               <Button className="deleteBtn" outline color="danger" size="sm" id={movie.id} onClick={handleDelete}>Remove from Shelf</Button>
@@ -201,7 +201,7 @@ const LibraryTab = () => {
                               />
                             </Media>
                             <Media body className="movieBody">
-                              <Media heading><strong>{movie.title} {'\('+movie.year+'\)'}</strong></Media>
+                              <Media heading><strong>{movie.title} {'('+movie.year+')'}</strong></Media>
                               {movie.synopsis}
                               <br />
                               <Button className="deleteBtn" outline color="danger" size="sm" id={movie.id} onClick={handleDelete} >Remove from Shelf</Button>
@@ -235,7 +235,7 @@ const LibraryTab = () => {
                               />
                             </Media>
                             <Media body className="movieBody">
-                              <Media heading><strong>{movie.title} {'\('+movie.year+'\)'}</strong></Media>
+                              <Media heading><strong>{movie.title} {'('+movie.year+')'}</strong></Media>
                               {movie.synopsis}
                               <br />
                               <Button className="deleteBtn" outline color="danger" size="sm" id={movie.id} onClick={handleDelete} >Remove from Shelf</Button>
@@ -269,7 +269,7 @@ const LibraryTab = () => {
                               />
                             </Media>
                             <Media body className="movieBody">
-                              <Media heading><strong>{movie.title} {'\('+movie.year+'\)'}</strong></Media>
+                              <Media heading><strong>{movie.title} {'('+movie.year+')'}</strong></Media>
                               {movie.synopsis}
                               <br />
                               <Button className="deleteBtn" outline color="danger" size="sm" id={movie.id} onClick={handleDelete} >Remove from Shelf</Button>
