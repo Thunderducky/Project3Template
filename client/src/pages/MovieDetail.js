@@ -115,6 +115,7 @@ function MovieDetail(props) {
     if (buttonStatus.DVD === "Show") {
         buttons.push(<Button
         className="formatBtn"
+        key="1"
         left="true"
         color="success"
         value="DVD"
@@ -125,6 +126,7 @@ function MovieDetail(props) {
     } else {
       buttons.push(<Button
       className="formatBtn"
+      key="1"
       left="true"
       outline
       disabled
@@ -138,6 +140,7 @@ function MovieDetail(props) {
     if (buttonStatus.BluRay === "Show") {
       buttons.push(<Button
         className="formatBtn"
+        key="2"
         left="true"
         color="primary"
         value="BluRay"
@@ -148,6 +151,7 @@ function MovieDetail(props) {
     } else {
       buttons.push(<Button
         className="formatBtn"
+        key="2"
         left="true"
         outline
         disabled
@@ -161,6 +165,7 @@ function MovieDetail(props) {
     if (buttonStatus.VOD === "Show") {
       buttons.push(<Button
         className="formatBtn"
+        key="3"
         left="true"
         color="warning"
         value="VOD"
@@ -171,6 +176,7 @@ function MovieDetail(props) {
     } else {
       buttons.push(<Button
         className="formatBtn"
+        key="3"
         left="true"
         outline
         disabled
