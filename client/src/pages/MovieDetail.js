@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Media, Button } from "reactstrap";
-import classnames from "classnames";
 import SqlAPI from "../utils/SQL-API";
 import OMDbAPI from "../utils/OMDbAPI";
 import { useMovieContext } from "../utils/movieContext";
-import {MOVIE_ID} from "../utils/actions";
 
 function MovieDetail(props) {
   const [movieState, dispatchMovie] = useMovieContext();
+  const [buttonStatus, setButtonStatus] = useState({
+    DVD: "Show",
+    BluRay: "Show",
+    VOD: "Show",
+    wishlist: "Show"
+  });
   const [movie, setMovie] = useState({
+    imdbID: "",
     title: "",
     poster: "",
     year: "",
@@ -55,9 +60,14 @@ function MovieDetail(props) {
     }
   };
 
+  useEffect(() => {
+    return;
+  },[buttonStatus])
+
   const handleSave = function (e) {
     e.preventDefault();
     const movieObject = {
+      imdbID: movie.imdbID,
       title: movie.Title,
       poster: movie.Poster,
       year: movie.Year,
@@ -68,9 +78,140 @@ function MovieDetail(props) {
     if (this.wish === "wishlist") {
       movieObject.wishlist = true;
     }
+    switch (movieObject.format) {
+      case "DVD":
+        setButtonStatus({
+          ...buttonStatus,
+          DVD: "Hidden"
+        })
+        break;
+      case "BluRay":
+        setButtonStatus({
+          ...buttonStatus,
+          BluRay: "Hidden"
+        })
+        break;
+      case "VOD":
+        setButtonStatus({
+          ...buttonStatus,
+          VOD: "Hidden"
+        })
+        break;
+      default:
+        break;
+    }
+    if (movieObject.wishlist) {
+      setButtonStatus({
+        ...buttonStatus,
+        wishlist: "Hidden"
+      })
+    }
     console.log(movieObject);
     saveMovieToDB(movieObject);
   };
+
+  const renderButtons = function() {
+    const buttons = [];
+    if (buttonStatus.DVD === "Show") {
+        buttons.push(<Button
+        className="formatBtn"
+        left="true"
+        color="success"
+        value="DVD"
+        onClick={handleSave}
+      >
+        DVD
+      </Button>)
+    } else {
+      buttons.push(<Button
+      className="formatBtn"
+      left="true"
+      outline
+      disabled
+      color="success"
+      value="DVD"
+      onClick={handleSave}
+    >
+      Saved DVD!
+    </Button>)
+    }
+    if (buttonStatus.BluRay === "Show") {
+      buttons.push(<Button
+        className="formatBtn"
+        left="true"
+        color="primary"
+        value="BluRay"
+        onClick={handleSave}
+      >
+        Blu-Ray
+      </Button>)
+    } else {
+      buttons.push(<Button
+        className="formatBtn"
+        left="true"
+        outline
+        disabled
+        color="primary"
+        value="BluRay"
+        onClick={handleSave}
+      >
+        Saved Blu-Ray!
+      </Button>)
+    }
+    if (buttonStatus.VOD === "Show") {
+      buttons.push(<Button
+        className="formatBtn"
+        left="true"
+        color="warning"
+        value="VOD"
+        onClick={handleSave}
+      >
+        VOD
+      </Button>)
+    } else {
+      buttons.push(<Button
+        className="formatBtn"
+        left="true"
+        outline
+        disabled
+        color="warning"
+        value="VOD"
+        onClick={handleSave}
+      >
+        VOD Saved!
+      </Button>)
+    }
+    return buttons.map(element => element)
+  }
+
+  const renderWishBtn = function() {
+    if (buttonStatus.wishlist === "Show") {
+      return (<Button
+                className="formatBtn"
+                left="true"
+                outline 
+                color="primary"
+                wish="wishlist"
+                onClick={handleSave}
+              >
+                Add to Wishlist
+            </Button>)
+    } else {
+      return (
+        <Button
+            className="formatBtn"
+            left="true"
+            outline
+            disabled
+            color="primary"
+            wish="wishlist"
+            onClick={handleSave}
+          >
+            Saved to Wishlist!
+          </Button>
+      )
+    }
+  }
 
   const handleImg = function (string) {
     if (string !== "N/A") {
@@ -88,8 +229,6 @@ function MovieDetail(props) {
     }
   };
 
-  const handleHide = function (e) {};
-
   return (
     <div>
       <h1 className="detailHeader"><strong>Movie Details</strong></h1>
@@ -103,49 +242,14 @@ function MovieDetail(props) {
           />
         </Media>
         <Media body className="movieBody">
-          <Media heading className="title"><h2><strong>{movie.Title} {'\('+ movie.Year + '\)'}</strong></h2></Media>
+          <Media heading className="title"><h2><strong>{movie.Title} {'('+ movie.Year + ')'}</strong></h2></Media>
           {handleSynopsis(movie.Plot)}
           <hr />
           <h3>Own it? Click the formats you own</h3>
-          <Button
-            className="formatBtn"
-            left="true"
-            color="success"
-            value="DVD"
-            onClick={handleSave}
-          >
-            DVD
-          </Button>
-          <Button
-            className="formatBtn"
-            left="true"
-            color="primary"
-            value="BluRay"
-            onClick={handleSave}
-          >
-            Blu-Ray
-          </Button>
-          <Button
-            className="formatBtn"
-            left="true"
-            color="warning"
-            value="VOD"
-            onClick={handleSave}
-          >
-            VOD
-          </Button>
+          {renderButtons()}
           <hr />
           <h3>Want to own it?</h3>
-          <Button
-            className="formatBtn"
-            left="true"
-            outline 
-            color="primary"
-            wish="wishlist"
-            onClick={handleSave}
-          >
-            Add to Wishlist
-          </Button>
+          {renderWishBtn()}
         </Media>
       </Media>
     </div>
