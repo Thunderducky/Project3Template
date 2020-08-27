@@ -1,7 +1,10 @@
 // Create our SQL schema
 module.exports = function(sequelize, DataTypes) {
   var Movie = sequelize.define("Movie", {
-    
+    imdbID: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
