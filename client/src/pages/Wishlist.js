@@ -30,7 +30,8 @@ const WishlistTab = () => {
   const retrieveMovies = async (tab) => {
     try {
         moviesArray = [];
-        const allMovies = await SqlAPI.getWishList();
+        const movieObject = await SqlAPI.getWishList();
+        const allMovies = movieObject.data;
         allMovies.forEach((movie) => moviesArray.push(movie));
         setMovieList(moviesArray);
         }
