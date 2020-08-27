@@ -58,7 +58,6 @@ module.exports = function (app) {
         try{
             const uid = req.user.id;
             req.body.UserId = uid;
-            console.log(req.body);
             let dbMovie = await db.Movie.create(req.body);
             res.json(dbMovie);
         }
