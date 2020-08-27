@@ -1,0 +1,40 @@
+
+
+.jumbotronWishlist {
+    align-content: center;
+    text-align: center;
+    background-image: url("https://images.unsplash.com/25/delicate.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=926&q=80");
+    background-position: center 53%;
+    background-size: cover;
+    color: white;
+}
+
+.header {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.poster {
+    height: 250px;
+    width: auto;
+    margin-left: 50px;
+}
+
+.movieItem {
+    width: 100%;
+}
+
+.movieBody {
+    padding: 25px;
+    margin-right: 10px;
+}
+
+.deleteBtn {
+    margin-top: 25px;
+}
+
+.largePoster {
+    height: 400px;
+    width: auto;
+    margin-left: 50px
+}
