@@ -148,20 +148,21 @@ const LibraryTab = () => {
           <TabContent activeTab={activeTab}>
             <TabPane tabId="All">
               <Row>
-                <Col className="header" sm="12">
+                <Col className="header" xs="11" sm="12">
                   <h4><strong>Your Library</strong></h4>
                 </Col>
               </Row>
               <Row>
-                <Col >
+                <Col xs="12">
                   <ListGroup>
                     {movieList.map((movie) => (
                       <Row>
                         <ListGroupItem className="movieItem" key={movie.id}>
                           <Media>
-                            <Media left href={movie.poster}>
-                              <Media className="poster"
+                            <Media left top href={movie.poster}>
+                              <Media  
                                 object
+                                className="poster"
                                 src={movie.poster}
                                 alt={movie.title}
                               />
@@ -182,7 +183,7 @@ const LibraryTab = () => {
             </TabPane>
             <TabPane tabId="DVD">
               <Row>
-                <Col className="header" sm="12">
+                <Col className="header" xs="12">
                   <h4><strong>Your DVDs</strong></h4>
                 </Col>
               </Row>
@@ -216,7 +217,7 @@ const LibraryTab = () => {
             </TabPane>
             <TabPane tabId="Blu-Ray">
               <Row>
-                <Col className="header" sm="12">
+                <Col className="header" xs="12">
                   <h4><strong>Your Blu-Rays</strong></h4>
                 </Col>
               </Row>
@@ -250,7 +251,7 @@ const LibraryTab = () => {
             </TabPane>
             <TabPane tabId="VOD">
               <Row>
-                <Col className="header" sm="12">
+                <Col className="header" xs="12">
                   <h4><strong>Your VOD Purchases</strong></h4>
                 </Col>
               </Row>
